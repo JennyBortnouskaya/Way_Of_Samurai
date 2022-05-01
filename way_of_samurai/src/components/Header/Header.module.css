@@ -1,0 +1,10 @@
+.logo {
+    width: 100px;
+    height: 100%; 
+  }
+  
+  .header {
+    background-color: var(--main_color); 
+    grid-area: header;
+    box-shadow: var(--box_shadow);
+  }

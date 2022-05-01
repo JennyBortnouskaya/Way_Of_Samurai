@@ -1,0 +1,10 @@
+.posts {
+    width: 500px;
+  }
+
+.post {
+    margin: 1rem 0rem;
+    padding: 1rem;
+    border: 2px solid var(--main_color);
+    border-radius: 20px;
+  }

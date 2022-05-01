@@ -1,0 +1,5 @@
+.friends_list { 
+    grid-area: friends;
+    background-color: white;
+    box-shadow: var(--box_shadow);
+  }

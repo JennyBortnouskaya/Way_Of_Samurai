@@ -1,0 +1,28 @@
+.nav {
+    background-color: #fff;
+    grid-area: nav; 
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    box-shadow: var(--box_shadow);
+    font-weight: var(--medium_font);
+  }
+  
+  .nav a {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: var(--main_font_color);
+  }
+  .nav a:focus{
+      color: var(--add_font_color);
+  }
+  
+  .nav a:hover {
+    background-color: var(--main_color); 
+    cursor: pointer;
+    color: var(--add_font_color);
+  }
+
+  .profileActive {
+    background-color: var(--main_color); 
+  }
