@@ -1,4 +1,6 @@
-const store = {
+import {renderEntireTree} from "../render";
+
+let store = {
 
     postData: [
         {message: 'Hello everyone'}, 
@@ -22,6 +24,14 @@ const store = {
         }
       ]
 }
+
+export let addPost = (postMessage) => {
+    let newPost = {
+        message: postMessage
+    }
+    store.postData.push(newPost);
+    renderEntireTree(store);
+};
 
 export default store; 
 

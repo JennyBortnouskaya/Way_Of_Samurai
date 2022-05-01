@@ -3,14 +3,16 @@ import Post from './MyPosts/Post/Post';
 import React from "react";
 
 
+
 function Profile(props) {
-    const posts = props.posts.map((post) => <Post message={post.message}/>)
+    const posts = props.posts.map((post) => <Post message={post.message} addPost={props.addPost}/>)
 
     let newPostElement = React.createRef();
 
     let addPost = () => {
         let inputValue = newPostElement.current.value;
-        alert(inputValue)
+        props.addPost(inputValue);
+        newPostElement.current.value = '';
     }
 
     return (

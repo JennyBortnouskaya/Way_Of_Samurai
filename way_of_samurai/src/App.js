@@ -18,7 +18,7 @@ function App(props) {
         <Navbar />
         <div className="content">
           <Route exact path='/profile'>
-            <Profile posts={props.store.postData}/>
+            <Profile posts={props.store.postData} addPost={props.addPost}/>
           </Route>
           <Route exact path='/dialogs'>
             <Dialogs dialogs={props.store.dialogsData}/>
