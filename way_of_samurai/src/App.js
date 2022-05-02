@@ -8,6 +8,7 @@ import Dialogs from './components/Dialogs/Dialogs';
 import News from './components/News/News'; 
 import Music from './components/Music/Music';
 import { BrowserRouter, Route } from 'react-router-dom';
+import {updateNewPostData} from "./redux/store";
 
 function App(props) {
  
@@ -18,7 +19,7 @@ function App(props) {
         <Navbar />
         <div className="content">
           <Route exact path='/profile'>
-            <Profile posts={props.store.postData} addPost={props.addPost}/>
+            <Profile posts={props.store.postData.posts} addPost={props.addPost} updateNewPostData={props.updateNewPostData}/>
           </Route>
           <Route exact path='/dialogs'>
             <Dialogs dialogs={props.store.dialogsData}/>

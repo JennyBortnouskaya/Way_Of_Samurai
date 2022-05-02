@@ -1,13 +1,18 @@
 import {renderEntireTree} from "../render";
 
+
+
 let store = {
 
-    postData: [
-        {message: 'Hello everyone'}, 
-        {message: 'This is my second post'}, 
-        {message: 'Forever young'}, 
-        {message: 'It is nice day'}
-      ], 
+    postData: {
+        posts: [
+            {message: 'Hello everyone'},
+            {message: 'This is my second post'},
+            {message: 'Forever young'},
+            {message: 'It is nice day'}
+        ],
+        newPosts: ''
+    },
       
       dialogsData: [
         {
@@ -24,12 +29,20 @@ let store = {
         }
       ]
 }
+window.store = store;
 
-export let addPost = (postMessage) => {
+//render and get posts value if there is new post
+export let addPost = () => {
     let newPost = {
-        message: postMessage
+        message: store.postData.newPosts
     }
-    store.postData.push(newPost);
+    store.postData.posts.push(newPost);
+    renderEntireTree(store);
+};
+
+//get and store new post value
+export let updateNewPostData = (newData) => {
+    store.postData.newPosts = newData;
     renderEntireTree(store);
 };
 

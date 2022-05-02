@@ -3,15 +3,22 @@ import Post from './MyPosts/Post/Post';
 import React from "react";
 
 
-
 function Profile(props) {
-    const posts = props.posts.map((post) => <Post message={post.message} addPost={props.addPost}/>)
 
+    //if input value changed, save value in props
+    let onPostChange = () => {
+        let postValue = newPostElement.current.value;
+        props.updateNewPostData(postValue);
+    }
+    // get all posts
+    const posts = props.posts.map((post) => <Post message={post.message} addPost={props.addPost} onChange={onPostChange}/>)
+
+    //create a link to interact with posts
     let newPostElement = React.createRef();
 
+    //for button to send input value
     let addPost = () => {
-        let inputValue = newPostElement.current.value;
-        props.addPost(inputValue);
+        props.addPost();
         newPostElement.current.value = '';
     }
 
@@ -19,7 +26,9 @@ function Profile(props) {
         <div className={styles.profile}>
             <div className={styles.person}>
                 <div className={styles.avatar}>
-                    <img src="https://i.guim.co.uk/img/media/c5e73ed8e8325d7e79babf8f1ebbd9adc0d95409/2_5_1754_1053/master/1754.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=b6ba011b74a9f7a5c8322fe75478d9df" alt="avatar" />
+                    <img
+                        src="https://i.guim.co.uk/img/media/c5e73ed8e8325d7e79babf8f1ebbd9adc0d95409/2_5_1754_1053/master/1754.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=b6ba011b74a9f7a5c8322fe75478d9df"
+                        alt="avatar"/>
                 </div>
                 <div className={styles.personal_info}>
                     <div className={styles.name}>Eugienia Bortouskaya</div>
@@ -28,7 +37,7 @@ function Profile(props) {
             <div className={styles.feed}>
                 <div className={styles.create_post}>
                     <h3>My posts</h3>
-                    <input placeholder="Start typing here" className={styles.newPost} ref={newPostElement}></input>
+                    <input placeholder="Start typing here" className={styles.newPost} ref={newPostElement} onChange={onPostChange}></input>
                     <button className={styles.postBtn} onClick={addPost}>Add post</button>
                 </div>
                 {posts}
