@@ -1,6 +1,5 @@
-import {renderEntireTree} from "../render";
-
-
+let renderEntireTree = () => {
+};
 
 let store = {
 
@@ -13,8 +12,8 @@ let store = {
         ],
         newPosts: ''
     },
-      
-      dialogsData: [
+
+    dialogsData: [
         {
             name: 'Alex',
             message: 'Hello, how are you?'
@@ -27,7 +26,7 @@ let store = {
             name: 'Jane',
             message: 'See you later'
         }
-      ]
+    ]
 }
 window.store = store;
 
@@ -45,6 +44,11 @@ export let updateNewPostData = (newData) => {
     store.postData.newPosts = newData;
     renderEntireTree(store);
 };
+
+//observer pattern
+export const subscribe = (observer) => {
+    renderEntireTree = observer;
+}
 
 export default store; 
 
