@@ -7,18 +7,22 @@ function Profile(props) {
 
     //if input value changed, save value in props
     let onPostChange = () => {
+        debugger
         let postValue = newPostElement.current.value;
-        props.updateNewPostData(postValue);
+        let action = {type: 'UPDATE-NEW-POST-DATA', postValue: postValue};
+        props.dispatch(action);
     }
     // get all posts
-    const posts = props.posts.map((post) => <Post message={post.message} addPost={props.addPost} onChange={onPostChange}/>)
+    const posts = props.posts.map((post) => <Post message={post.message} dispatch={props.dispatch}
+                                                  onChange={onPostChange}/>)
 
     //create a link to interact with posts
     let newPostElement = React.createRef();
 
     //for button to send input value
     let addPost = () => {
-        props.addPost();
+        debugger
+        props.dispatch({type: 'ADD-POST'});
         newPostElement.current.value = '';
     }
 
@@ -37,7 +41,8 @@ function Profile(props) {
             <div className={styles.feed}>
                 <div className={styles.create_post}>
                     <h3>My posts</h3>
-                    <input placeholder="Start typing here" className={styles.newPost} ref={newPostElement} onChange={onPostChange}></input>
+                    <input placeholder="Start typing here" className={styles.newPost} ref={newPostElement}
+                           onChange={onPostChange}></input>
                     <button className={styles.postBtn} onClick={addPost}>Add post</button>
                 </div>
                 {posts}

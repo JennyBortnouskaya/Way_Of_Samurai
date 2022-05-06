@@ -5,10 +5,8 @@ import ReactDOM from "react-dom";
 import App from "./App";
 
 let renderEntireTree = (state) => {
-    debugger
     ReactDOM.render(
-            <App state={store.getState()} addPost={store.addPost.bind(store)}
-                 updateNewPostData={store.updateNewPostData.bind(store)}/>,
+        <App state={store.getState()} dispatch={store.dispatch.bind(store)}/>,
         document.getElementById('root')
     );
 }

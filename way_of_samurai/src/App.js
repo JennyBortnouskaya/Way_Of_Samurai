@@ -10,32 +10,32 @@ import Music from './components/Music/Music';
 import {BrowserRouter, Route} from 'react-router-dom';
 
 function App(props) {
- 
-  return (
-    <BrowserRouter>
-      <div className="container">
-        <Header />
-        <Navbar />
-        <div className="content">
-          <Route exact path='/profile'>
-            <Profile posts={props.state.postData.posts} addPost={props.addPost} updateNewPostData={props.updateNewPostData}/>
-          </Route>
-          <Route exact path='/dialogs'>
-            <Dialogs dialogs={props.state.dialogsData}/>
-          </Route>
-          <Route exact path='/news'>
-            <News />
-          </Route>
-          <Route exact path='/music'>
-            <Music />
-          </Route>
-          
-        </div>
-        <FriendsBar />
-        <Footer />
-      </div>
-    </BrowserRouter>
-  );
+
+    return (
+        <BrowserRouter>
+            <div className="container">
+                <Header/>
+                <Navbar/>
+                <div className="content">
+                    <Route exact path='/profile'>
+                        <Profile posts={props.state.postData.posts} dispatch={props.dispatch}/>
+                    </Route>
+                    <Route exact path='/dialogs'>
+                        <Dialogs dialogs={props.state.dialogsData}/>
+                    </Route>
+                    <Route exact path='/news'>
+                        <News/>
+                    </Route>
+                    <Route exact path='/music'>
+                        <Music/>
+                    </Route>
+
+                </div>
+                <FriendsBar/>
+                <Footer/>
+            </div>
+        </BrowserRouter>
+    );
 }
 
 

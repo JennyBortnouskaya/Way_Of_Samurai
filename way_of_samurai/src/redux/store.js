@@ -27,8 +27,7 @@ let store = {
         ]
     },
 
-    getState(){
-        debugger
+    getState() {
         return this._state;
     },
 
@@ -36,8 +35,7 @@ let store = {
     },
 
     //render and get posts value if there is new post
-    addPost() {
-        debugger;
+    _addPost() {
         let newPost = {
             message: this._state.postData.newPosts
         }
@@ -45,7 +43,7 @@ let store = {
         this.renderEntireTree(this._state);
     },
     //get and store new post value
-    updateNewPostData(newData) {
+    _updateNewPostData(newData) {
         this._state.postData.newPosts = newData;
         this.renderEntireTree(this._state);
 
@@ -53,6 +51,15 @@ let store = {
     //observer pattern
     subscribe(observer) {
         this.renderEntireTree = observer;
+    },
+
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            this._addPost()
+        } else if (action.type === 'UPDATE-NEW-POST-DATA') {
+            this._updateNewPostData(action.postValue)
+        }
+
     }
 
 
