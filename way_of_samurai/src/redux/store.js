@@ -1,3 +1,6 @@
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_DATA = 'UPDATE-NEW-POST-DATA';
+
 let store = {
 
     _state: {
@@ -54,16 +57,23 @@ let store = {
     },
 
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             this._addPost()
-        } else if (action.type === 'UPDATE-NEW-POST-DATA') {
+        } else if (action.type === UPDATE_NEW_POST_DATA) {
             this._updateNewPostData(action.postValue)
         }
-
     }
+};
 
+//action creator for new post value
+export const addPostActionCreator = () => ({type: ADD_POST});
 
-}
+//action creator for update post value
+export const updatePostActionCreator = (postValue) => ({
+    type: UPDATE_NEW_POST_DATA,
+    postValue: postValue
+});
+
 window.store = store;
 
 export default store;

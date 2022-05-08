@@ -1,15 +1,15 @@
 import styles from './Profile.module.css';
 import Post from './MyPosts/Post/Post';
 import React from "react";
+import {addPostActionCreator, updatePostActionCreator} from "../../redux/store";
 
 
 function Profile(props) {
 
     //if input value changed, save value in props
     let onPostChange = () => {
-        debugger
         let postValue = newPostElement.current.value;
-        let action = {type: 'UPDATE-NEW-POST-DATA', postValue: postValue};
+        let action = updatePostActionCreator(postValue);
         props.dispatch(action);
     }
     // get all posts
@@ -21,8 +21,7 @@ function Profile(props) {
 
     //for button to send input value
     let addPost = () => {
-        debugger
-        props.dispatch({type: 'ADD-POST'});
+        props.dispatch(addPostActionCreator());
         newPostElement.current.value = '';
     }
 
