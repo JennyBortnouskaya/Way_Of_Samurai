@@ -1,5 +1,28 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_DATA = 'UPDATE-NEW-POST-DATA';
+const UPDATE_NEW_DIALOG_DATA = 'UPDATE-NEW-DIALOG-DATA';
+const SEND_MESSAGE = 'SEND-MESSAGE';
+
+//action creator for new post value
+export const addPostActionCreator = () => ({type: ADD_POST});
+
+//action creator for update post value
+export const updatePostActionCreator = (postValue) => ({
+    type: UPDATE_NEW_POST_DATA,
+    postValue: postValue
+});
+
+//action creator for new dialog value
+export const addNewDialogCreator = () => ({
+    type: SEND_MESSAGE,
+});
+
+//action creator for update dialog value
+export const updateDialogsCreator = (dialogValue) => ({
+    type: UPDATE_NEW_DIALOG_DATA,
+    dialogValue: dialogValue
+});
+
 
 let store = {
 
@@ -14,20 +37,24 @@ let store = {
             newPosts: ''
         },
 
-        dialogsData: [
-            {
-                name: 'Alex',
-                message: 'Hello, how are you?'
-            },
-            {
-                name: 'John',
-                message: 'Okay, bye'
-            },
-            {
-                name: 'Jane',
-                message: 'See you later'
-            }
-        ]
+        dialogsData: {
+            dialogs: [
+                {
+                    name: 'Alex',
+                    message: 'Hello, how are you?'
+                },
+                {
+                    name: 'John',
+                    message: 'Okay, bye'
+                },
+                {
+                    name: 'Jane',
+                    message: 'See you later'
+                }
+            ],
+            newDialogs: ''
+        },
+
     },
 
     getState() {
@@ -51,6 +78,19 @@ let store = {
         this.renderEntireTree(this._state);
 
     },
+    //render and get dialogs value if there is new dialog
+    _sendMessage(){
+        let dialogValue = this._state.dialogsData.newDialogs;
+        this._state.dialogsData.newDialogs = ' ';
+        this._state.dialogsData.dialogs.push({name: 'Jenny', message: dialogValue});
+        this.renderEntireTree(this._state);
+    },
+
+    //get and store new dialog value
+    _updateNewMessageData(newDialogs){
+        this._state.dialogsData.newDialogs = newDialogs;
+        this.renderEntireTree(this._state);
+    },
     //observer pattern
     subscribe(observer) {
         this.renderEntireTree = observer;
@@ -61,18 +101,13 @@ let store = {
             this._addPost()
         } else if (action.type === UPDATE_NEW_POST_DATA) {
             this._updateNewPostData(action.postValue)
+        } else if (action.type === SEND_MESSAGE){
+            this._sendMessage()
+        } else if (action.type === UPDATE_NEW_DIALOG_DATA) {
+            this._updateNewMessageData(action.dialogValue);
         }
     }
 };
-
-//action creator for new post value
-export const addPostActionCreator = () => ({type: ADD_POST});
-
-//action creator for update post value
-export const updatePostActionCreator = (postValue) => ({
-    type: UPDATE_NEW_POST_DATA,
-    postValue: postValue
-});
 
 window.store = store;
 
