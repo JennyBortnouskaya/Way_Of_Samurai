@@ -1,7 +1,7 @@
 import Dialog from './Dialog/Dialog';
 import styles from "./Dialog/Dialog.module.css";
-import {addNewDialogCreator, updateDialogsCreator} from "../../redux/store";
 import React from "react";
+import {addNewDialogCreator, updateDialogsCreator} from "../../redux/dialogReducer";
 
 
 const Dialogs = (props) => {
