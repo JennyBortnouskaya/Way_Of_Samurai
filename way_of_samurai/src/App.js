@@ -10,7 +10,6 @@ import Music from './components/Music/Music';
 import {BrowserRouter, Route} from 'react-router-dom';
 
 function App(props) {
-
     return (
         <BrowserRouter>
             <div className="container">
@@ -18,10 +17,10 @@ function App(props) {
                 <Navbar/>
                 <div className="content">
                     <Route exact path='/profile'>
-                        <Profile posts={props.state.postData.posts} dispatch={props.dispatch}/>
+                        <Profile posts={props.state.profileReducer.posts} dispatch={props.dispatch}/>
                     </Route>
                     <Route exact path='/dialogs'>
-                        <Dialogs dialogs={props.state.dialogsData.dialogs} dispatch={props.dispatch}/>
+                        <Dialogs dialogs={props.state.dialogReducer.dialogs} dispatch={props.dispatch}/>
                     </Route>
                     <Route exact path='/news'>
                         <News/>

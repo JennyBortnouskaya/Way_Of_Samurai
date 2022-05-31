@@ -12,8 +12,24 @@ export const updateDialogsCreator = (dialogValue) => ({
     dialogValue: dialogValue
 });
 
-
-export const dialogReducer = (store, action) => {
+let initialState = {
+    dialogs: [
+        {
+            name: 'Alex',
+            message: 'Hello, how are you?'
+        },
+        {
+            name: 'John',
+            message: 'Okay, bye'
+        },
+        {
+            name: 'Jane',
+            message: 'See you later'
+        }
+    ],
+    newDialogs: ''
+};
+export const dialogReducer = (store = initialState, action) => {
     //render and get dialogs value if there is new dialog
     const sendMessage = () => {
         let dialogValue = store.newDialogs;
@@ -22,7 +38,7 @@ export const dialogReducer = (store, action) => {
     };
 
 //get and store new dialog value
-    const updateNewMessageData = (newDialogs) =>{
+    const updateNewMessageData = (newDialogs) => {
         store.newDialogs = newDialogs;
     };
 

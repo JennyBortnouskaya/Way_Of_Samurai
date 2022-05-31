@@ -10,8 +10,17 @@ export const updatePostActionCreator = (postValue) => ({
     postValue: postValue
 });
 
+let initialState = {
+    posts: [
+        {message: 'Hello everyone'},
+        {message: 'This is my second post'},
+        {message: 'Forever young'},
+        {message: 'It is nice day'}
+    ],
+    newPosts: ''
+};
 
-export const profileReducer = (store, action) => {
+export const profileReducer = (store = initialState, action) => {
 //render and get posts value if there is new post
     const addPost = () => {
         let newPost = {
