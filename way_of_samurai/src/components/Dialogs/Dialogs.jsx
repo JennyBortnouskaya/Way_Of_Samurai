@@ -1,7 +1,6 @@
 import Dialog from './Dialog/Dialog';
 import styles from "./Dialog/Dialog.module.css";
 import React from "react";
-import {addNewDialogCreator, updateDialogsCreator} from "../../redux/dialogReducer";
 
 
 const Dialogs = (props) => {
@@ -11,14 +10,17 @@ const Dialogs = (props) => {
 
     let newDialogBody = props.dialogs.newDialogs;
 
-    let onDialogInputChange = (e) => {
-        let dialogValue = e.target.value;
-        props.dispatch(updateDialogsCreator(dialogValue));
+    //create a link to interact with dialogs
+    let newDialogElement = React.createRef();
+
+    let onDialogInputChange = () => {
+        let dialogValue = newDialogElement.current.value;
+        props.dialogInputChange(dialogValue);
     };
 
     let onSendDialogClick = () => {
-        props.dispatch(addNewDialogCreator());
-        props.dialogs.newDialogs = '';
+        props.sendDialog();
+        newDialogElement.current.value = '';
     };
 
 
@@ -32,7 +34,8 @@ const Dialogs = (props) => {
                     <textarea className={styles.dialogInput}
                               placeholder='Please enter your message'
                               value={newDialogBody}
-                              onChange={onDialogInputChange}></textarea></div>
+                              onChange={onDialogInputChange}
+                              ref={newDialogElement}></textarea></div>
                 <div>
                     <button className={styles.sendDialogBtn} onClick={onSendDialogClick}>Send</button>
                 </div>

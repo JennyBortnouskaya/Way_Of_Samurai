@@ -1,7 +1,6 @@
 import styles from './Profile.module.css';
 import Post from './MyPosts/Post/Post';
 import React from "react";
-import {addPostActionCreator, updatePostActionCreator} from "../../redux/profileReducer";
 
 
 function Profile(props) {
@@ -9,19 +8,17 @@ function Profile(props) {
     //if input value changed, save value in props
     let onPostChange = () => {
         let postValue = newPostElement.current.value;
-        let action = updatePostActionCreator(postValue);
-        props.dispatch(action);
+        props.postChange(postValue);
     }
     // get all posts
     const posts = props.posts.map((post) => <Post message={post.message} dispatch={props.dispatch}
                                                   onChange={onPostChange}/>)
-
     //create a link to interact with posts
     let newPostElement = React.createRef();
 
     //for button to send input value
-    let addPost = () => {
-        props.dispatch(addPostActionCreator());
+    let onAddPost = () => {
+        props.addPost();
         newPostElement.current.value = '';
     }
 
@@ -42,7 +39,7 @@ function Profile(props) {
                     <h3>My posts</h3>
                     <input placeholder="Start typing here" className={styles.newPost} ref={newPostElement}
                            onChange={onPostChange}></input>
-                    <button className={styles.postBtn} onClick={addPost}>Add post</button>
+                    <button className={styles.postBtn} onClick={onAddPost}>Add post</button>
                 </div>
                 {posts}
             </div>
