@@ -9,7 +9,7 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
-function App(props) {
+const App = () => {
     return (
         <BrowserRouter>
             <div className="container">
@@ -17,10 +17,10 @@ function App(props) {
                 <Navbar/>
                 <div className="content">
                     <Route exact path='/profile'>
-                        <ProfileContainer store={props.store}/>
+                        <ProfileContainer/>
                     </Route>
                     <Route exact path='/dialogs'>
-                        <DialogsContainer store={props.store}/>
+                        <DialogsContainer/>
                     </Route>
                     <Route exact path='/news'>
                         <News/>

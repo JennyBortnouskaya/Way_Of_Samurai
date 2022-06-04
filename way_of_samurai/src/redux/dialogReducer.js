@@ -30,25 +30,23 @@ let initialState = {
     newDialogs: ''
 };
 export const dialogReducer = (store = initialState, action) => {
-    //render and get dialogs value if there is new dialog
-    const sendMessage = () => {
-        let dialogValue = store.newDialogs;
-        store.newDialogs = ' ';
-        store.dialogs.push({name: 'Jenny', message: dialogValue});
-    };
-
-//get and store new dialog value
-    const updateNewMessageData = (newDialogs) => {
-        store.newDialogs = newDialogs;
-    };
 
     switch (action.type) {
-        case SEND_MESSAGE:
-            sendMessage()
-            return store;
-        case UPDATE_NEW_DIALOG_DATA:
-            updateNewMessageData(action.dialogValue);
+        case SEND_MESSAGE: {
+            let dialogValue = store.newDialogs;
+            let storeCopy = {...store};
+            storeCopy.dialogs = [...store.dialogs];
+            storeCopy.newDialogs = '';
+            storeCopy.dialogs.push({name: 'Jenny', message: dialogValue});
+            return storeCopy;
+        }
+        case UPDATE_NEW_DIALOG_DATA: {
+            let storeCopy = {...store};
+            storeCopy.newDialogs = action.dialogValue;
+            return storeCopy;
+        }
+        default:
             return store;
     }
-    return store;
+
 }

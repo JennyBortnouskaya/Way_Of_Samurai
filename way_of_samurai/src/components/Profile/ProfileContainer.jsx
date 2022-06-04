@@ -1,26 +1,28 @@
 import React from "react";
 import {addPostActionCreator, updatePostActionCreator} from "../../redux/profileReducer";
 import Profile from "./Profile";
+import {connect} from "react-redux";
 
 
-function ProfileContainer(props) {
-
-    let state = props.store.getState();
-
-    //if input value changed, save value in props
-    let postChange = (postValue) => {
-        let action = updatePostActionCreator(postValue);
-        props.store.dispatch(action);
+let mapStateToProps = (state) =>{
+    debugger
+    return{
+        posts: state.profileReducer.posts,
+        newPosts: state.profileReducer.newPosts
     }
-
-    //for button to send input value
-    let addPost = () => {
-        props.store.dispatch(addPostActionCreator());
-    }
-
-    return (
-        <Profile postChange={postChange} addPost={addPost} posts={state.profileReducer.posts} newPosts={state.profileReducer.newPosts}/>
-    )
 }
+export let mapDispatchToProps = (dispatch) =>{
+
+    return{
+        postChange: (postValue) => {
+            debugger
+            dispatch(updatePostActionCreator(postValue));
+        },
+        addPost: () => {
+            dispatch(addPostActionCreator());
+        }
+    }
+}
+const ProfileContainer = connect(mapStateToProps,mapDispatchToProps)(Profile);
 
 export default ProfileContainer;

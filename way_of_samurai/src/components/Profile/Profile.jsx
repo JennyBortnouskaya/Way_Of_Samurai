@@ -4,6 +4,8 @@ import React from "react";
 
 
 function Profile(props) {
+    //create a link to interact with posts
+    let newPostElement = React.createRef();
 
     //if input value changed, save value in props
     let onPostChange = () => {
@@ -13,8 +15,7 @@ function Profile(props) {
     // get all posts
     const posts = props.posts.map((post) => <Post message={post.message} dispatch={props.dispatch}
                                                   onChange={onPostChange}/>)
-    //create a link to interact with posts
-    let newPostElement = React.createRef();
+
 
     //for button to send input value
     let onAddPost = () => {

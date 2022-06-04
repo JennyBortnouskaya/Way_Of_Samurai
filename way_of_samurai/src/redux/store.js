@@ -47,7 +47,7 @@ let store = {
     },
 
     dispatch(action) {
-        this._state.postData = profileReducer(this._state.postData, action)
+        this. _state.postData = profileReducer(this._state.postData, action)
         this._state.dialogsData = dialogReducer(this._state.dialogsData, action)
         this.renderEntireTree(this._state);
     }
