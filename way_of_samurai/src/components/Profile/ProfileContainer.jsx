@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 
 
 let mapStateToProps = (state) =>{
-    debugger
+
     return{
         posts: state.profileReducer.posts,
         newPosts: state.profileReducer.newPosts
@@ -15,7 +15,6 @@ export let mapDispatchToProps = (dispatch) =>{
 
     return{
         postChange: (postValue) => {
-            debugger
             dispatch(updatePostActionCreator(postValue));
         },
         addPost: () => {

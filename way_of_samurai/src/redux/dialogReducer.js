@@ -31,20 +31,24 @@ let initialState = {
 };
 export const dialogReducer = (store = initialState, action) => {
 
+
     switch (action.type) {
-        case SEND_MESSAGE: {
+
+        case SEND_MESSAGE:
             let dialogValue = store.newDialogs;
-            let storeCopy = {...store};
-            storeCopy.dialogs = [...store.dialogs];
-            storeCopy.newDialogs = '';
-            storeCopy.dialogs.push({name: 'Jenny', message: dialogValue});
-            return storeCopy;
-        }
-        case UPDATE_NEW_DIALOG_DATA: {
-            let storeCopy = {...store};
-            storeCopy.newDialogs = action.dialogValue;
-            return storeCopy;
-        }
+            return {
+                ...store,
+                newDialogs: '',
+                dialogs: [...store.dialogs, {name: 'Jenny', message: dialogValue}]
+
+            };
+
+        case UPDATE_NEW_DIALOG_DATA:
+            return {
+                ...store,
+                newDialogs: action.dialogValue
+            };
+
         default:
             return store;
     }

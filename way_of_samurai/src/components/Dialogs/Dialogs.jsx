@@ -5,7 +5,7 @@ import React from "react";
 
 const Dialogs = (props) => {
     const dialog_item = props.dialogs.map((dialog) => {
-        return <Dialog name={dialog.names} message={dialog.message}/>
+        return <Dialog name={dialog.names} message={dialog.message} key={dialog.id}/>
     })
 
     let newDialogBody = props.dialogs.newDialogs;

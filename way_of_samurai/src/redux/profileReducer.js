@@ -23,22 +23,23 @@ let initialState = {
 export const profileReducer = (store = initialState, action) => {
 
     switch (action.type) {
-        case ADD_POST: {
+        case ADD_POST:
             let newPost = {
                 message: store.newPosts
             }
-            let storeCopy = {...store};
-            storeCopy.posts = [...store.posts];
-            storeCopy.posts.push(newPost);
-            storeCopy.newPosts = '';
-            return storeCopy;
-        }
-        case UPDATE_NEW_POST_DATA: {
+            return {
+                ...store,
+                posts: [...store.posts, newPost],
+                newPosts: ''
+            };
 
-            let storeCopy = {...store};
-            storeCopy.newPosts = action.postValue;
-            return storeCopy;
-        }
+        case UPDATE_NEW_POST_DATA:
+
+            return {
+                ...store,
+                newPosts: action.postValue
+            };
+
         default:
             return store;
     }

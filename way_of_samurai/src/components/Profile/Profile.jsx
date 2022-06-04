@@ -13,7 +13,7 @@ function Profile(props) {
         props.postChange(postValue);
     }
     // get all posts
-    const posts = props.posts.map((post) => <Post message={post.message} dispatch={props.dispatch}
+    const posts = props.posts.map((post) => <Post message={post.message} dispatch={props.dispatch} key={post.id}
                                                   onChange={onPostChange}/>)
 
 
