@@ -6,16 +6,19 @@ import axios from "axios";
 //user page layout
 const Users = (props) => {
 
-    //get server data
-    if (props.users.length === 0) {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
-            .then(response => props.setUsers(
-                response.data.items
-            ));
+    let getUsers = () => {
+        //get server data
+        if (props.users.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users')
+                .then(response => props.setUsers(
+                    response.data.items
+                ));
+        }
     }
 
+
     return (
-        <div>
+        <div><button onClick={getUsers}>Get Users</button>
             {props.users.map(user =>
 
                 <div key={user.id}>
