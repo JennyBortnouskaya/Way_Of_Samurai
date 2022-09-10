@@ -8,6 +8,7 @@ function Navbar() {
             <NavLink to="/dialogs" activeClassName={styles.profileActive}>Messages</NavLink>
             <NavLink to="/news" activeClassName={styles.profileActive}>News</NavLink>
             <NavLink to="/music" activeClassName={styles.profileActive}>Music</NavLink>
+            <NavLink to="/users" activeClassName={styles.profileActive}>Users</NavLink>
         </nav>
     )
 }

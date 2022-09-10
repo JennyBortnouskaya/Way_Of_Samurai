@@ -8,6 +8,7 @@ import Music from './components/Music/Music';
 import {BrowserRouter, Route} from 'react-router-dom';
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
 const App = () => {
     return (
@@ -28,6 +29,9 @@ const App = () => {
                     <Route exact path='/music'>
                         <Music/>
                     </Route>
+                    <Route exact path='/users'>
+                        <UsersContainer/>
+                    </Route>
 
                 </div>
                 <FriendsBar/>
@@ -36,6 +40,5 @@ const App = () => {
         </BrowserRouter>
     );
 }
-
 
 export default App;
