@@ -1,56 +1,30 @@
 import styles from "./Users.module.css";
 import React from "react";
-import axios from "axios";
 
-class Users extends React.Component {
+let Users = (props) => {
 
-    componentDidMount() {
-        //get server data
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
-                    this.props.setUsers(
-                        response.data.items
-                    )
-                    this.props.setTotalUsersCount(
-                        response.data.totalCount
-                    )
-                }
-            );
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+    let pages = [];
+
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i);
     }
+    return (
+        <div>
+            <div className='pageDiv'
+                 {...pages.map(p => {
+                     debugger;
 
-    onPageChanged = (pageNumber) => {
-        this.props.setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
-            .then(response => this.props.setUsers(
-                response.data.items
-            ));
-    }
+                     return <span className={props.currentPage === p && styles.selectedPage}
+                                  onClick={(e) => {
+                                      props.onPageChanged(p)
+                                  }}>{p}</span>;
+                 })}
+            >
+            </div>
+            {props.users.map(user =>
 
-    render() {
-
-        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
-        let pages = [];
-
-        for (let i = 1; i <= pagesCount; i++) {
-            pages.push(i);
-        }
-
-        return (
-            <div>
-                <div className='pageDiv'
-                    {...pages.map(p => {
-                        debugger;
-
-                        return <span className={this.props.currentPage === p && styles.selectedPage}
-                                     onClick={(e) => {
-                                         this.onPageChanged(p)
-                                     }}>{p}</span>;
-                    })}
-                >
-                </div>
-                {this.props.users.map(user =>
-
-                    <div key={user.id}>
+                <div key={user.id}>
 
                     <span>
                         <div><img
@@ -59,23 +33,21 @@ class Users extends React.Component {
                         <div>
                             {user.followed
                                 ? <button onClick={() => {
-                                    this.props.unfollow(user.id)
+                                    props.unfollow(user.id)
                                 }}> Unfollow </button>
                                 : <button onClick={() => {
-                                    this.props.follow(user.id)
+                                    props.follow(user.id)
                                 }}> Follow </button>
                             }
                         </div>
                                 </span>
-                        <span>
+                    <span>
                                 <div>{user.name}</div>
                                 <div>{user.status}</div>
                                 </span>
-                    </div>
-                )}
-            </div>
-        )
-    }
+                </div>
+            )}
+        </div>
+    )
 }
-
 export default Users;
