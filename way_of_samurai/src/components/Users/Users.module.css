@@ -1,10 +1,27 @@
-.userPhoto{
+.pageDiv {
+    width: 940px;
+    overflow: hidden;
+}
+
+.userPhoto {
     width: 200px;
     height: 200px;
 }
-.selectedPage{
+
+.page {
+    width: 50px;
+    height: 50px;
+    padding: 2px;
+}
+
+.selectedPage {
     font-weight: bold;
     background: aqua;
     width: 50px;
     height: 50px;
+    padding: 2px;
+}
+
+.selectedPage:hover {
+    cursor: pointer;
 }

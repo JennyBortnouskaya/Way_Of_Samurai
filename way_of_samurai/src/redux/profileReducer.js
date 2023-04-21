@@ -1,14 +1,18 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_DATA = 'UPDATE-NEW-POST-DATA';
+const SET_USER_PROFILE = 'SET-USER-PROFILE';
 
 //action creator for new post value
-export const addPostActionCreator = () => ({type: ADD_POST});
+export const addPost = (newvalue) => ({type: ADD_POST, payload: newvalue});
 
 //action creator for update post value
-export const updatePostActionCreator = (postValue) => ({
+export const updatePost = (postValue) => ({
     type: UPDATE_NEW_POST_DATA,
-    postValue: postValue
+    payload: postValue
 });
+
+//action creator for users
+export const setUsersProfile = (profile) => ({type: SET_USER_PROFILE, payload: profile});
 
 let initialState = {
     posts: [
@@ -17,7 +21,8 @@ let initialState = {
         {message: 'Forever young'},
         {message: 'It is nice day'}
     ],
-    newPosts: ''
+    newPostValue: '',
+    profile: null
 };
 
 export const profileReducer = (store = initialState, action) => {
@@ -25,7 +30,8 @@ export const profileReducer = (store = initialState, action) => {
     switch (action.type) {
         case ADD_POST:
             let newPost = {
-                message: store.newPosts
+                id: Date.now(),
+                message: action.payload
             }
             return {
                 ...store,
@@ -37,7 +43,13 @@ export const profileReducer = (store = initialState, action) => {
 
             return {
                 ...store,
-                newPosts: action.postValue
+                newPosts: action.payload
+            };
+        case SET_USER_PROFILE:
+
+            return {
+                ...store,
+                profile: action.payload
             };
 
         default:

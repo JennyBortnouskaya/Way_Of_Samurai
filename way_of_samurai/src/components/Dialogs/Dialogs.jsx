@@ -5,7 +5,7 @@ import React from "react";
 
 const Dialogs = (props) => {
     const dialog_item = props.dialogs.map((dialog) => {
-        return <Dialog name={dialog.names} message={dialog.message} key={dialog.id}/>
+        return <Dialog name={dialog.names} message={dialog.message} key={dialog.message}/>
     })
 
     let newDialogBody = props.dialogs.newDialogs;
@@ -35,7 +35,8 @@ const Dialogs = (props) => {
                               placeholder='Please enter your message'
                               value={newDialogBody}
                               onChange={onDialogInputChange}
-                              ref={newDialogElement}></textarea></div>
+                              ref={newDialogElement}/>
+                </div>
                 <div>
                     <button className={styles.sendDialogBtn} onClick={onSendDialogClick}>Send</button>
                 </div>
