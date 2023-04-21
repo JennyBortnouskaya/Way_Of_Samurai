@@ -1,20 +1,25 @@
-import React from "react";
+import React, {useState} from "react";
 import {addPost, setUsersProfile, updatePost} from "../../redux/profileReducer";
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import axios from "axios";
+import {withRouter} from 'react-router-dom';
+
 
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
+
+        const userId = this.props.match.params.userId ? this.props.match.params.userId : 2;
+
         //get server data
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
             .then(response => {
                     this.props.setUsersProfile(response.data);
+                    this.setState({profile: response.data})
                 }
             );
     }
-
 
     //if input value changed, save value in props
     onPostChange = (value) => {
@@ -30,7 +35,6 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
-        debugger
         return (
             <Profile
                 posts={this.props.posts}
@@ -47,8 +51,11 @@ let mapStateToProps = (state) => ({
     profile: state.profileReducer.profile
 
 })
+
+let containerComponentWithUrlData = withRouter(ProfileContainer);
+
 export default connect(mapStateToProps, {
     addPost,
     updatePost,
     setUsersProfile
-})(ProfileContainer);
+})(containerComponentWithUrlData);
