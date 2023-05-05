@@ -1,10 +1,25 @@
 .logo {
     width: 100px;
-    height: 100%; 
-  }
-  
-  .header {
-    background-color: var(--main_color); 
+    height: 100%;
+}
+
+.header {
+    background-color: var(--main_color);
     grid-area: header;
     box-shadow: var(--box_shadow);
-  }
+}
+
+.loginBlock {
+    float: right;
+    padding: 20px;
+}
+
+.loginBlock a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 23px;
+}
+
+.loginBlock a:hover{
+    text-decoration: underline;
+}
