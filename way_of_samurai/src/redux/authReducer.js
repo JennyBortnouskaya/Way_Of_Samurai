@@ -2,9 +2,9 @@ const SET_USER_DATA = 'SET_USER_DATA';
 
 //authentication store
 let initialState = {
-	usersId: null,
-	email: null,
-	login: null,
+	usersId: 20570,
+	email: 'jenny.b17@mail.ru',
+	login: 'gienie_b17',
 	isLogIn: false
 };
 
