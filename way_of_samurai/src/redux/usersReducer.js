@@ -4,6 +4,7 @@ const SET_USERS = 'SET-USERS';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
+const TOGGLE_FOLLOWING_PROCESS = 'TOGGLE_FOLLOWING_PROCESS';
 
 //user page store
 let initialState = {
@@ -11,7 +12,8 @@ let initialState = {
 	pageSize: 3,
 	totalUsersCount: 0,
 	currentPage: 1,
-	isFetching: true
+	isFetching: true,
+	followingInProgress: []
 };
 
 //action processing
@@ -58,6 +60,13 @@ export const usersReducer = (store = initialState, action) => {
 				...store,
 				isFetching: action.isFetching
 			};
+			case TOGGLE_FOLLOWING_PROCESS:
+			return {
+				...store,
+				followingInProgress: action.isFetching
+					? [...store.followingInProgress, action.userId]
+					: store.followingInProgress.filter(id => id !== action.userId)
+			};
 
 		default:
 			return store;
@@ -98,4 +107,11 @@ export const setTotalUsersCount = (totalUsersCount) => ({
 export const setToggleIsFetching = (isFetching) => ({
 	type: TOGGLE_IS_FETCHING,
 	isFetching
+});
+
+//action creator to for follow/unfollow status tracking
+export const followingInProgress = (isFetching, userId) => ({
+	type: TOGGLE_FOLLOWING_PROCESS,
+	isFetching,
+	userId
 });

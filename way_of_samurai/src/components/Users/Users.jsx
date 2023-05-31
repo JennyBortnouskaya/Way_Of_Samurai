@@ -2,6 +2,7 @@ import styles from './Users.module.css';
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import axios from 'axios';
+import {followingInProgress} from '../../redux/usersReducer';
 
 let Users = (props) => {
 
@@ -38,43 +39,49 @@ let Users = (props) => {
 							</div>
                         <div>
                             {user.followed
-								? <button onClick={() => {
+								? <button disabled={props.followingInProgress.some(id => id === user.id)}
+										  onClick={() => {
+											  props.followingInProgress(true, user.id);
 
-									//delete server data
-									axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-										{
-											withCredentials: true,
-											headers: {
-												'API-KEY': '6923b870-8944-47cc-9df6-38538d743985'
-											}
-										}
-									)
-										.then(response => {
-												if (response.data.resultCode === 0) {
-													props.unfollow(user.id);
-												}
-											}
-										);
-								}}> Unfollow </button>
-								: <button onClick={() => {
+											  //delete server data
+											  axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
+												  {
+													  withCredentials: true,
+													  headers: {
+														  'API-KEY': '6923b870-8944-47cc-9df6-38538d743985'
+													  }
+												  }
+											  )
+												  .then(response => {
+														  if (response.data.resultCode === 0) {
+															  props.unfollow(user.id);
+														  }
+														  props.followingInProgress(false, user.id);
+													  }
+												  );
+										  }}> Unfollow </button>
+								: <button disabled={props.followingInProgress.some(id => id === user.id)}
+										  onClick={() => {
+											  props.followingInProgress(true, user.id);
 
-									//post server data
-									axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-										{},
-										{
-											withCredentials: true,
-											headers: {
-												'API-KEY': '6923b870-8944-47cc-9df6-38538d743985'
-											}
-										}
-									)
-										.then(response => {
-												if (response.data.resultCode === 0) {
-													props.follow(user.id);
-												}
-											}
-										);
-								}}> Follow </button>
+											  //post server data
+											  axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
+												  {},
+												  {
+													  withCredentials: true,
+													  headers: {
+														  'API-KEY': '6923b870-8944-47cc-9df6-38538d743985'
+													  }
+												  }
+											  )
+												  .then(response => {
+														  if (response.data.resultCode === 0) {
+															  props.follow(user.id);
+														  }
+														  props.followingInProgress(false, user.id);
+													  }
+												  );
+										  }}> Follow </button>
 							}
                         </div>
                                 </span>
